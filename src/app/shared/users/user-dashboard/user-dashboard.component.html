@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 my-3 d-flex justify-content-end">
+      <button [routerLink]="['addUser']" mat-raised-button color="primary">Add Users</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 my-3">
+            <ul class="list-group">
+                <li [routerLink]="[user.userId]"
+                *ngFor="let user of usersArray; trackBy : trackById"
+                class="list-group-item">
+                {{user.userName}} <small>{{user.userId}}</small>
+            </li>
+            </ul>
+        </div>
+    </div>
+</div>

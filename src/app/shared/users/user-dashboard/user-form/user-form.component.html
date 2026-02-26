@@ -1,0 +1,154 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2 my-3">
+        <mat-card>
+            <mat-card-content>
+                <form [formGroup]="userForm" (ngSubmit)="onUsersAdd()">
+                    <div class="form-group">
+                        <label for="userName">User Name</label>
+                        <input 
+                        formControlName="userName"
+                        type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userRole">User Role</label>
+                        <input 
+                        formControlName="userRole"
+                        type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profileDescription">Description</label>
+                        <input 
+                        formControlName="profileDescription"
+                        type="text" class="form-control">
+                    </div>
+
+                    <div class="fom-group">
+                        <label for="profileImage">Image Url</label>
+                        <input 
+                        formControlName="profileImage"
+                        type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experienceYears">experienceYears</label>
+                        <select formControlName="experienceYears" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="isActive">Is Active</label>
+                        <select formControlName="isActive" class="form-control">
+                            <option [ngValue]="true">Yes</option>
+                            <option [ngValue]="false">No</option>
+                        </select>
+                    </div>
+
+                    <div class="row" formGroupName="address">
+                        <div class="col-md-6" formGroupName="current">
+                            <h4>Current Address</h4>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select formControlName="country" class="form-control">
+                                    <option *ngFor="let country of countryArr" [value]="country.name">{{country.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input  
+                                formControlName="state"
+                                type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input 
+                                formControlName="city"
+                                type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="zipcode">ZipCode</label>
+                                <input 
+                                formControlName="zipcode"
+                                type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" formGroupName="permanent">
+                            <h4>Permanent Address</h4>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select formControlName="country" class="form-control">
+                                    <option *ngFor="let country of countryArr; trackby : trackById" [value]="country.name">{{country.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input  
+                                formControlName="state"
+                                type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input 
+                                formControlName="city"
+                                type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="zipcode">ZipCode</label>
+                                <input 
+                                formControlName="zipcode"
+                                type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="isAddressSame">
+                        <input type="checkbox" formControlName="isAddressSame">Is Address Same</label>
+                    </div>
+
+                    <div formArrayName="skills">
+                        <h4>Skills</h4>
+                        <div class="row" *ngFor="let skill of skillsArr.controls;trackby : trackById; let i = index">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <input 
+                                    [formControlName]="i"
+                                    type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2" *ngIf="i > 0">
+                                <button mat-raised-button color="warn" type="button" (click)="onSkillsRemove(i)">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="skillsArr.length < 5;else noSkills">
+                        <button mat-raised-button color="primary" class="mb-4" (click)="addSkills()">Add Skills</button>
+                    </div>
+                    <ng-template #noSkills>
+                        <strong class="text-danger">
+                                <p class="alert alert-info">You can add upto 5 skills!!!</p>
+                        </strong>
+                    </ng-template>
+
+                    <button *ngIf="!isInEditMode" mat-stroked-button color="warn" class="w-100">Add Users</button>
+                    <button *ngIf="isInEditMode" type="button" (click)="onUpdate()" mat-stroked-button color="warn" class="w-100">Update Users</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 my-3">
+      <mat-card class="example-card" *ngIf="users;else noObj">
+        <mat-card-title-group>
+          <mat-card-title>{{ users.userName }}</mat-card-title>
+          <mat-card-subtitle>{{ users.userRole }}</mat-card-subtitle>
+          <img mat-card-lg-image [src]="users.profileImage" />
+        </mat-card-title-group>
+        <mat-card-content>
+          {{ users.profileDescription }}
+        </mat-card-content>
+        <mat-card-actions class="d-flex justify-content-between">
+          <button routerLink="edit" mat-raised-button color="primary">Edit</button>
+          <button (click)="onRemove()" mat-raised-button color="warn">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <ng-template #noObj>
+        <strong class="text-danger">
+            No Data To Show Here!!!
+        </strong>
+      </ng-template>
+    </div>
+
+
+    <div class="col-md-8">
+        <mat-card>
+            <h3>BAsic Information</h3>
+
+            <p>UserId : {{users.userId}}</p>
+            <p>Experience : {{users.experienceYears}}</p>
+            <p class="m-0">
+                Status : <span class="badge" [ngClass]="{
+                    'badge-success' : users.isActive,
+                    'badge-danger' : users.isActive
+                }">
+                {{users.isActive ? 'Active' : 'In-Active'}}    
+            </span>
+            </p>
+        </mat-card>
+
+
+        <mat-card class="my-3">
+            <h3><strong>Skills</strong></h3>
+            <mat-chip-list aria-label="Fish selection">
+                <mat-chip
+                *ngFor="let skill of users.skills" color="accent" selected
+                >{{skill}}
+               </mat-chip>
+            </mat-chip-list>
+        </mat-card>
+
+        <mat-card>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><strong>Current Address</strong></h4>
+                    <p class="mb-2">{{users.address.current.country}}</p>
+                    <p class="mb-2">{{users.address.current.state}}</p>
+                    <p class="mb-2">{{users.address.current.city}}</p>
+                    <p class="mb-2">{{users.address.current.zipcode}}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <h4><strong>Permanent Address</strong></h4>
+                    <p class="mb-2">{{users.address.current.country}}</p>
+                    <p class="mb-2">{{users.address.current.state}}</p>
+                    <p class="mb-2">{{users.address.current.city}}</p>
+                    <p class="mb-2">{{users.address.current.zipcode}}</p>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+  </div>
+</div>
+
+
